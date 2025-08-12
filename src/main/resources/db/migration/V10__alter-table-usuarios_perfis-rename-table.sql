@@ -1,0 +1,1 @@
+alter table usuarios_perfis rename column perfil_id to perfis_id;

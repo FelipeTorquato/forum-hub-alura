@@ -1,0 +1,1 @@
+alter table usuario_perfil rename usuarios_perfis;

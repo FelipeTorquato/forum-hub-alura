@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-@Entity
+@Entity(name = "Curso")
 @Table(name = "cursos")
 public class Curso {
 
