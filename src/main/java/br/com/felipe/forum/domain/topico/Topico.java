@@ -15,7 +15,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @Entity(name = "Topico")
 @Table(name = "topicos")
@@ -38,15 +38,13 @@ public class Topico {
     @OneToMany(mappedBy = "topico")
     private List<Resposta> respostas;
 
-    public Topico(TopicoDTO topicoDTO) {
+    public Topico(TopicoDTO topicoDTO, Curso curso, Usuario usuarioLogado) {
         this.titulo = topicoDTO.titulo();
         this.mensagem = topicoDTO.mensagem();
         this.dataCriacao = LocalDateTime.now();
         this.status = Status.ABERTO;
-        // pegar o usuario da requisicao
-        this.usuario = new Usuario();
-        // ver como vai pegar o curso, provavelmente pelo id
-        this.curso = new Curso();
+        this.usuario = usuarioLogado;
+        this.curso = curso;
         this.respostas = new ArrayList<Resposta>();
     }
 

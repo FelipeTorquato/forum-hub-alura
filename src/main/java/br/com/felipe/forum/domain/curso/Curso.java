@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @Entity(name = "Curso")
 @Table(name = "cursos")
 public class Curso {

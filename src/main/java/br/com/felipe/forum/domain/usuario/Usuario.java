@@ -1,6 +1,7 @@
 package br.com.felipe.forum.domain.usuario;
 
 import br.com.felipe.forum.domain.perfil.Perfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -27,10 +28,13 @@ public class Usuario implements UserDetails {
     private Long id;
     private String nome;
     private String email;
+
+    @JsonIgnore
     private String senha;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonManagedReference
+    @JsonIgnore
     private List<Perfil> perfis;
 
     @Override
@@ -38,6 +42,7 @@ public class Usuario implements UserDetails {
         return List.of(new SimpleGrantedAuthority("ADMIN"));
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() {
         return senha;
