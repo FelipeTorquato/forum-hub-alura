@@ -1,7 +1,7 @@
 package br.com.felipe.forum.domain.resposta;
 
-import br.com.felipe.forum.domain.usuario.Usuario;
 import br.com.felipe.forum.domain.topico.Topico;
+import br.com.felipe.forum.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @Entity(name = "Resposta")
 @Table(name = "respostas")
 public class Resposta {

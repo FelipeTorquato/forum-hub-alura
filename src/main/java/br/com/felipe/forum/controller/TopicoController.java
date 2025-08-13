@@ -12,7 +12,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -36,9 +35,20 @@ public class TopicoController {
     }
 
     @PostMapping
-    @Transactional
     public ResponseEntity<Topico> cadastrarTopico(@Valid @RequestBody TopicoDTO topicoDTO,
                                                   @AuthenticationPrincipal Usuario usuarioLogado) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(topicoService.salvar(topicoDTO, usuarioLogado));
+        return ResponseEntity.status(HttpStatus.CREATED).body(topicoService.salvarTopico(topicoDTO, usuarioLogado));
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Topico> atualizarTopico(@PathVariable Long id,
+                                                  @Valid @RequestBody TopicoDTO topicoDTO) {
+        return ResponseEntity.ok(topicoService.editarTopico(topicoDTO, id));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity excluirTopico(@PathVariable Long id) {
+        topicoService.excluirTopico(id);
+        return ResponseEntity.noContent().build();
     }
 }

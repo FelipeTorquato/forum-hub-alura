@@ -27,6 +27,7 @@ public class Topico {
     private String titulo;
     private String mensagem;
     private LocalDateTime dataCriacao;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @ManyToOne
