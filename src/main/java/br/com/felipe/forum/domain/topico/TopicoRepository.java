@@ -9,14 +9,14 @@ import java.util.Optional;
 
 public interface TopicoRepository extends JpaRepository<Topico, Long> {
     @Query("""
-            SELECT new br.com.felipe.forum.domain.topico.ListagemTopicosDTO(t.id, t.titulo, t.mensagem, t.curso.id)
+            SELECT new br.com.felipe.forum.domain.topico.ListagemTopicosDTO(t.id, t.titulo, t.mensagem, t.curso.id, t.respostas)
             FROM Topico t ORDER BY t.id
             """)
     Page<ListagemTopicosDTO> findAllProjected(Pageable paginacao);
 
     @Query("""
-            SELECT new br.com.felipe.forum.domain.topico.ListagemTopicosDTO(t.id, t.titulo, t.mensagem, t.curso.id)
-            FROM Topico t WHERE t.id = :id
-           """)
+             SELECT new br.com.felipe.forum.domain.topico.ListagemTopicosDTO(t.id, t.titulo, t.mensagem, t.curso.id, t.respostas)
+             FROM Topico t WHERE t.id = :id
+            """)
     Optional<ListagemTopicosDTO> buscarPorId(Long id);
 }
