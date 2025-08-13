@@ -25,15 +25,20 @@ public class TopicoController {
         this.topicoService = topicoService;
     }
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity<Topico> cadastrarTopico(@Valid @RequestBody TopicoDTO topicoDTO,
-                                                  @AuthenticationPrincipal Usuario usuarioLogado) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(topicoService.salvar(topicoDTO, usuarioLogado));
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ListagemTopicosDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(topicoService.buscarPorId(id));
     }
 
     @GetMapping
     public ResponseEntity<Page<ListagemTopicosDTO>> listarTopicos(@PageableDefault(size = 10) Pageable paginacao) {
         return ResponseEntity.ok(topicoService.listarTopicos(paginacao));
+    }
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity<Topico> cadastrarTopico(@Valid @RequestBody TopicoDTO topicoDTO,
+                                                  @AuthenticationPrincipal Usuario usuarioLogado) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(topicoService.salvar(topicoDTO, usuarioLogado));
     }
 }

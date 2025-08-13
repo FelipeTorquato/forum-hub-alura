@@ -25,6 +25,14 @@ public class TopicoService {
         return topicoRepository.findAllProjected(paginacao);
     }
 
+    public ListagemTopicosDTO buscarPorId(Long id) {
+        Optional<ListagemTopicosDTO> topico = topicoRepository.buscarPorId(id);
+        if (topico.isEmpty()) {
+            throw new RuntimeException("Tópico não encontrado.");
+        }
+        return topico.get();
+    }
+
     public Topico salvar(TopicoDTO topicoDTO, Usuario usuarioLogado) {
         Optional<Curso> curso = cursoRepository.findById(topicoDTO.curso_id());
         if (curso.isEmpty()) {
